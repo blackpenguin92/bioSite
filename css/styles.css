@@ -14,5 +14,6 @@ nav li {
   background-image: url('../images/axe.webp');
 }
 nav li a {
+  color: white;
   text-decoration: none;
 }
