@@ -11,15 +11,18 @@ html, body, h1, h2, p, ul, li, img, header, nav, main, section, figure, figcapti
 
 body {
   background: linear-gradient(to right, #4d3b2b, #8b6f46, #c4a76a);
-
+  /* This is something new not in the book. It allows text to adjust according to the viewport size. */
+  font-size: clamp(16px, 1.5vw, 22px); 
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto auto auto;
-  max-width: 1200px;
+  max-width: 100%;
+  width: 95%;
   margin: 0 auto;
+  background-color: #040404;
 }
 
 /* VIKING INSPIRED FONTS */
@@ -28,9 +31,44 @@ body {
   color: #c4c4c4;
 }
 
-h1, h2 {
+h1 {
   font-family: "Cinzel", serif;
   color: #64c4df;
+  font-size: clamp(28px, 3vw, 48px);
+  position: relative;
+  display: inline-block;
+  padding 0 120px;
+}
+
+/* H1 PSEUDO ELEMENTS NOT DONE IN CLASS */
+h1::before, h1::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 100px;
+  height: 4px;
+  background-color: #4cad68;
+}
+
+h1::before {
+  left: 0;
+  transform: translateX(-120%);
+}
+
+h1::after {
+  right: 0;
+  transform: translateX(120%);
+}
+
+h2 {
+  font-family: "Cinzel", serif;
+  color: #64c4df;
+  font-size: clamp(24px, 2.5vw, 36px);
+}
+
+p {
+  font-size: clamp(16px, 1.5vw, 24px);
+  line-height: 1.6;
 }
 
 /* HEADER */
@@ -84,7 +122,7 @@ nav ul li a:hover {
 .hero {
   background-color: #040404;
   text-align: center;
-  padding: 20px;
+  padding: 0;
 }
 .hero img {
   width: 100%;
@@ -103,15 +141,54 @@ nav ul li a:hover {
 }
 
 .intro h2, .about-grid h2, .hobby-intro h2 {
-  font-size: 28px;
   color: #64c4df;
   margin-bottom: 15px;
 }
 
 .intro p, .about-grid p, .hobby-intro p {
-  font-size: 18px;
   max-width: 1000px;
   margin: 0 auto 20px auto;
+}
+
+.intro-images {
+  display: grid;
+  background-color: #040404;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.intro-images img {
+  border: 3px solid #4cad68;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.achievements {
+  background-color: #040404;
+  color: #C4C4C4;
+  padding: 30px;
+}
+
+.achievements h2 {
+  text-align: left;
+}
+
+.achievements ul li {
+  text-align: left;
 }
 
 /* ABOUT PAGE IMAGES */
@@ -132,7 +209,27 @@ nav ul li a:hover {
   margin: 0 auto;
 }
 
-/* HOBBY PAGE GALLERY */
+/* HOBBY PAGE */
+.schedule h2 {
+  padding-left: 20px;
+}
+
+.schedule table {
+  display: none;
+}
+
+.mobile-schedule {
+  display: block;
+  padding: 15px;
+}
+
+.mobile-schedule li {
+  list-style-type: none;
+  margin-bottom: 10px;
+  border-left: 4px solid #4cad68;
+  padding-left: 10px;
+}
+
 .gallery {
   background-color: #040404;
   display: grid;
@@ -164,12 +261,22 @@ nav ul li a:hover {
   font-style: italic;
 }
 
+/* IMAGE TRANSITIONS NOT DONE IN CLASS EITHER*/
+.about-images img, .intro-images img, .gallery img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-images img:hover, .intro-images img:hover, .gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 15px rgba(255, 223, 128, 0.5);
+}
+
 /* FOOTER */
 footer {
   background-color: #2b2b2b;
   text-align: center;
   padding: 20px;
-  color: #64c4df; /* Dark text for contrast */
+  color: #64c4df;
   font-weight: bold;
 }
 
@@ -192,22 +299,82 @@ footer {
     object-position: 50% 10%;
   }
 
-  .gallery {
+  .intro-grid {
     grid-template-columns: 1fr 1fr;
-    text-align: left;
+  }
+
+  .intro-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .intro-images img {
+    max-width: 100%;
+    border-radius: 8px;
   }
 
   .about-images {
     flex-direction: row;
     justify-content: center;
   }
+
+  .about-images img {
+    max-width: 100%;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .about-text {
+    text-align: left;
+  }
+
+  .mobile-schedule {
+    display: none;
+  }
+  
+  .schedule table {
+    display: block;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #040404;
+    color: #c4c4c4;
+    text-align: left;
+    padding: 20px 20px;
+  }
+
+  .schedule table th, td {
+    padding: 12px;
+    border: 1px solid #4cad68;
+  }
+  
+  .schedule table th {
+    background-color: #4cad68;
+    color: #040404;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+  }
 } 
 
 /* DESKTOP VIEWPORT */
 @media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+  }
   body {
     background-image: url("../images/norse_texture.webp");
     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
   nav ul {
     justify-content: space-evenly;
@@ -215,6 +382,44 @@ footer {
     margin: 0 auto;
   }
   .gallery {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* LARGER DESKTOP VIEWPORT */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1600px;
+  }
+
+  nav ul li a {
+    font-size: 25px;
+  }
+
+  .about-images img {
+    max-width: 500px;
+  }
+}
+
+/* PRINT VIEWPORT */
+@media print {
+  body {
+    background: none;
+    color: black;
+    font-size: 12pt;
+  }
+
+  .container {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  nav, .hero {
+    display: none;
+  }
+
+  .intro-images img, .about-images img, .gallery img {
+    border: none;
+    box-shadow: none;
   }
 }
