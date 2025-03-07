@@ -370,17 +370,20 @@ footer {
   .container {
     max-width: 1200px;
   }
+
   body {
     background-image: url("../images/norse_texture.webp");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
   }
+
   nav ul {
     justify-content: space-evenly;
     max-width: 800px;
     margin: 0 auto;
   }
+  
   .gallery {
     grid-template-columns: 1fr 1fr 1fr;
   }
